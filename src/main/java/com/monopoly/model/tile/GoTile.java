@@ -1,11 +1,23 @@
-public class GoTile extends Title {
-    public GoTile(String name, int position) {
-        super(name, position, false);
+package com.monopoly.model.tile;
+
+import com.monopoly.context.GameContext;
+import com.monopoly.model.player.Player;
+
+public class GoTile extends Tile {
+
+    private static final int PASS_GO_REWARD = 200;
+
+    public GoTile(int position) {
+        super(position, "GO");
     }
 
     @Override
     public void onLand(Player player, GameContext context) {
-        super.onLand(player, context);
-        System.out.println(player.getName() + " landed on Go and receives $200!");
+        context.getBank().pay(player, PASS_GO_REWARD);
+        player.receive(PASS_GO_REWARD);
+    }
+
+    public int getReward() {
+        return PASS_GO_REWARD;
     }
 }

@@ -1,12 +1,24 @@
-public class ChanceTile extends Title {
-    public ChanceTile(String name, int position) {
-        super(name, position, false);
+package com.monopoly.model.tile;
+
+import com.monopoly.context.GameContext;
+import com.monopoly.model.card.Card;
+import com.monopoly.model.card.CardDeck;
+import com.monopoly.model.player.Player;
+
+public class ChanceTile extends Tile {
+
+    private final CardDeck chanceDeck;
+
+    public ChanceTile(int position, CardDeck chanceDeck) {
+        super(position, "Chance");
+        this.chanceDeck = chanceDeck;
     }
 
     @Override
     public void onLand(Player player, GameContext context) {
-        super.onLand(player, context);
-        System.out.println(player.getName() + " landed on Chance and draws a card!");
-        // Logic to draw a Chance card and execute its effect
+        Card card = chanceDeck.draw();
+        if (card != null) {
+            card.apply(player, context);
+        }
     }
 }

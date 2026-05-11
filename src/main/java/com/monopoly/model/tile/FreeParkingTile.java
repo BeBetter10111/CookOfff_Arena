@@ -1,11 +1,16 @@
-public class FreeParkingTile extends Title {
-    public FreeParkingTile(String name, int position) {
-        super(name, position, false);
+package com.monopoly.model.tile;
+
+import com.monopoly.context.GameContext;
+import com.monopoly.model.player.Player;
+
+public class FreeParkingTile extends Tile {
+
+    public FreeParkingTile(int position) {
+        super(position, "Free Parking");
     }
 
     @Override
     public void onLand(Player player, GameContext context) {
-        super.onLand(player, context);
-        System.out.println(player.getName() + " landed on Free Parking. Take a break!");
+        // Không có hiệu ứng theo luật chuẩn
     }
 }

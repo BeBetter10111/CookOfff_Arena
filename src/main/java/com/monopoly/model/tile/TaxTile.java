@@ -1,17 +1,25 @@
-public class TaxTile extends Title {
-    private int taxAmount;
+package com.monopoly.model.tile;
 
-    public TaxTile(String name, int position, int taxAmount) {
-        super(name, position, false);
+import com.monopoly.context.GameContext;
+import com.monopoly.model.player.Player;
+
+public abstract class TaxTile extends Tile {
+
+    protected final int taxAmount;
+
+    protected TaxTile(int position, String name, int taxAmount) {
+        super(position, name);
         this.taxAmount = taxAmount;
     }
 
     @Override
     public void onLand(Player player, GameContext context) {
-        super.onLand(player, context);
-        System.out.println(player.getName() + " must pay tax of $" + taxAmount);
-        player.deductMoney(taxAmount);
-        context.getBank().addMoney(taxAmount);
+        boolean paid = player.pay(taxAmount);
+        if (!paid) {
+            context.getBank().handleDebt(player, null, taxAmount);
+            return;
+        }
+        context.getBank().collect(taxAmount);
     }
 
     public int getTaxAmount() {
