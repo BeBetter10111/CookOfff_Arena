@@ -1,4 +1,4 @@
-package main.java.com.monopoly.action;
+package com.monopoly.action;
 import java.util.ArrayList;
 import java.util.List;
 

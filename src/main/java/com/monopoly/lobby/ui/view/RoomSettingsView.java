@@ -104,10 +104,10 @@ public class RoomSettingsView {
         HBox numBtnRow = new HBox(16, numBtns[0], numBtns[1], numBtns[2], numBtns[3]);
         numBtnRow.setAlignment(Pos.CENTER_LEFT);
 
-        HBox numLine = new HBox(24, buildLabel("Number of players", 22, TEXT_DARK), numBtnRow);
+        HBox numLine = new HBox(24, buildLabel("Real players (total = 4)", 22, TEXT_DARK), numBtnRow);
         numLine.setAlignment(Pos.CENTER_LEFT);
 
-        HBox modeLine = new HBox(24, buildLabel("Mode", 22, TEXT_DARK), modeRow);
+        HBox modeLine = new HBox(24, buildLabel("Bot mode", 22, TEXT_DARK), modeRow);
         modeLine.setAlignment(Pos.CENTER_LEFT);
 
         VBox formBox = new VBox(20, numLine, modeLine);

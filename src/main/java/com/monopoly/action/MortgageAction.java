@@ -1,6 +1,7 @@
 package com.monopoly.action;
 
 import com.monopoly.context.GameContext;
+import com.monopoly.interfaces.ITileAction;
 import com.monopoly.model.player.Player;
 
 

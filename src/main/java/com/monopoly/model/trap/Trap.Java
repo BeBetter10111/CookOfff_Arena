@@ -1,6 +1,7 @@
 package com.monopoly.model.trap;
 
 
+import com.monopoly.model.GameDifficulty;
 import com.monopoly.model.player.Player;
 
 
@@ -19,7 +20,7 @@ public abstract class Trap {
     }
 
 
-    public abstract void trigger(Player victim);
+    public abstract TrapEffect trigger(Player victim, GameDifficulty difficulty);
 
 
     public abstract String getDescription();

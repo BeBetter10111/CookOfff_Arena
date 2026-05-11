@@ -101,7 +101,8 @@ public class WaitingRoomView {
     }
 
     private VBox buildPlayerCard(int seat, Player player) {
-        Label seatLbl = buildLabel("Player " + seat, 20, TEXT_DARK);
+        String seatText = player != null && player.isBot() ? "Bot " + seat : "Player " + seat;
+        Label seatLbl = buildLabel(seatText, 20, TEXT_DARK);
 
         Label tokenLbl = new Label(player != null ? player.getToken() : "?");
         tokenLbl.setFont(Font.font(36));

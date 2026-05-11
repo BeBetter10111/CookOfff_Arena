@@ -91,13 +91,19 @@ public class GameSetupView {
                 statusLbl.setText("Please choose a token.");
                 return;
             }
+            boolean tokenUsed = room.getPlayers().stream()
+                .anyMatch(p -> p.getToken().equals(TOKENS[selectedToken[0]]));
+            if (tokenUsed) {
+                statusLbl.setText("Token already selected in this room.");
+                return;
+            }
 
             int seatNumber = room.getPlayerCount() + 1;
             Player player = new Player(name, TOKENS[selectedToken[0]], seatNumber);
 
             boolean added = room.addPlayer(player);
             if (!added) {
-                statusLbl.setText("Room is full – cannot join.");
+                statusLbl.setText("Room has enough human players.");
                 return;
             }
 

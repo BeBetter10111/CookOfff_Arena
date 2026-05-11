@@ -5,7 +5,7 @@ import com.monopoly.model.player.Player;
 import com.monopoly.model.tile.PropertyTile;
 import com.monopoly.model.tile.RailroadTile;
 import com.monopoly.model.tile.UtilityTile;
-import com.monopoly.model.board.Tile;
+import com.monopoly.model.tile.Tile;
 
 /**
  * ConservativeBuyStrategy — Strategy Pattern

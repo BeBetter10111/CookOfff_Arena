@@ -17,6 +17,7 @@ public class HumanPlayer extends Player {
     public void onLandDecision(PropertyTile property, boolean wantToBuy) {
         if (wantToBuy && deductBalance(property.getPrice())) {
             property.setOwner(this);
+            addProperty(property);
         }
     }
 }

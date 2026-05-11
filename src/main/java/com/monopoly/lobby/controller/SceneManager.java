@@ -3,9 +3,7 @@ package com.monopoly.lobby.controller;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- * Wraps the application's primary Stage and provides scene switching.
- */
+
 public class SceneManager {
 
     private static SceneManager instance;

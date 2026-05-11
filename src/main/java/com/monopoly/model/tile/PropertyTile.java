@@ -63,13 +63,15 @@ public class PropertyTile extends Tile {
     }
 
     public int calcRent(Player lander, GameContext context) {
+        int trapMultiplier = context.getTrapRentMultiplier();
         if (houses == 0) {
             boolean monopoly = hasMonopoly();
-            return monopoly ? rentTiers[0] * 2 : rentTiers[0];
+            int base = monopoly ? rentTiers[0] * 2 : rentTiers[0];
+            return base * trapMultiplier;
         }
 
         int tier = Math.min(houses, HOTEL_MARKER);
-        return rentTiers[tier];
+        return rentTiers[tier] * trapMultiplier;
     }
 
     public boolean buildHouse(GameContext context) {

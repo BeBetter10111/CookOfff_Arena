@@ -1,10 +1,14 @@
-package main.java.com.monopoly.action;
+package com.monopoly.action;
 
 import com.monopoly.context.GameContext;
+import com.monopoly.interfaces.IBuyStrategy;
+import com.monopoly.interfaces.ITileAction;
 import com.monopoly.model.player.Player;
+import com.monopoly.model.tile.PropertyTile;
+import com.monopoly.model.tile.Tile;
 
 public class BuyPropertyAction implements ITileAction {
-    private IBuyStrategy buyStrategy;
+    private final IBuyStrategy buyStrategy;
 
     public BuyPropertyAction(IBuyStrategy buyStrategy) {
         this.buyStrategy = buyStrategy;
@@ -12,11 +16,13 @@ public class BuyPropertyAction implements ITileAction {
 
     @Override
     public void onLand(Player player, GameContext context) {
-        if (buyStrategy.shouldBuy(player, context)) {
-            // Logic to buy the property
-            System.out.println(player.getName() + " decides to buy the property.");
-        } else {
-            System.out.println(player.getName() + " decides not to buy the property.");
+        Tile tile = context.getBoard().getTile(player.getPosition());
+        if (!(tile instanceof PropertyTile property) || property.getOwner() != null) return;
+
+        if (buyStrategy.shouldBuy(property, player) && player.pay(property.getPrice())) {
+            property.setOwner(player);
+            player.addProperty(property);
+            context.getActionHistory().recordAction(player.getName() + " bought " + property.getName());
         }
     }
 }

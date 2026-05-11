@@ -30,7 +30,7 @@ public class RailroadTile extends Tile {
             return;
         }
 
-        int rent  = calcRent(owner);
+        int rent  = calcRent(owner) * context.getTrapRentMultiplier();
         boolean paid = player.pay(rent);
 
         if (!paid) {
@@ -43,9 +43,10 @@ public class RailroadTile extends Tile {
     }
 
     public int calcRent(Player railroadOwner) {
-        long count = railroadOwner.getAllProperties().stream()
-                .filter(p -> p instanceof RailroadTile)
+        long count = railroadOwner.getProperties().stream()
+                .filter(p -> p.getName().contains("Railroad"))
                 .count();
+        if (count <= 0) count = 1;
         return (int) (BASE_RENT * Math.pow(2, count - 1));
     }
 

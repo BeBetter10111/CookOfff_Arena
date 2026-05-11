@@ -1,6 +1,7 @@
 package com.monopoly.model.trap;
 
 
+import com.monopoly.model.GameDifficulty;
 import com.monopoly.model.player.Player;
 
 
@@ -13,7 +14,7 @@ public class SwapTrap extends Trap {
 
 
     @Override
-    public void trigger(Player victim) {
+    public TrapEffect trigger(Player victim, GameDifficulty difficulty) {
         Player owner = getOwner();
 
 
@@ -24,10 +25,14 @@ public class SwapTrap extends Trap {
         owner.setPosition(victimPosition);
         victim.setPosition(ownerPosition);
 
-
         deactivate();
+        return TrapEffect.none();
     }
 
 
+    @Override
+    public String getDescription() {
+        return "Swap trap";
+    }
 }
 

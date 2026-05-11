@@ -32,7 +32,7 @@ public class UtilityTile extends Tile {
         }
 
         int diceTotal = context.getBank().getLastDiceTotal();
-        int rent      = calcRent(diceTotal, owner);
+        int rent      = calcRent(diceTotal, owner) * context.getTrapRentMultiplier();
         boolean paid  = player.pay(rent);
 
         if (!paid) {
@@ -45,8 +45,8 @@ public class UtilityTile extends Tile {
     }
 
     public int calcRent(int diceTotal, Player utilityOwner) {
-        long count = utilityOwner.getAllProperties().stream()
-                .filter(p -> p instanceof UtilityTile)
+        long count = utilityOwner.getProperties().stream()
+                .filter(p -> p.getName().contains("Utility") || p.getName().contains("Water") || p.getName().contains("Electric"))
                 .count();
         int multiplier = (count >= 2) ? BOTH_MULTIPLIER : SINGLE_MULTIPLIER;
         return diceTotal * multiplier;

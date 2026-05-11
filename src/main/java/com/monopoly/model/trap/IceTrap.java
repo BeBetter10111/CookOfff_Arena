@@ -1,13 +1,11 @@
 package com.monopoly.model.trap;
 
 
+import com.monopoly.model.GameDifficulty;
 import com.monopoly.model.player.Player;
 
 
 public class IceTrap extends Trap {
-
-
-    private static final int FREEZE_TURNS = 1;
 
 
     public IceTrap(Player owner, int tilePosition) {
@@ -16,10 +14,17 @@ public class IceTrap extends Trap {
 
 
     @Override
-    public void trigger(Player victim) {
-        victim.setFrozenTurns(FREEZE_TURNS);
+    public TrapEffect trigger(Player victim, GameDifficulty difficulty) {
+        int freezeTurns = difficulty == GameDifficulty.HARD ? 2 : 1;
+        int rentMultiplier = difficulty == GameDifficulty.HARD ? 3 : 2;
+        victim.setFrozenTurns(freezeTurns);
         deactivate();
+        return new TrapEffect(rentMultiplier, 0, false);
     }
 
 
+    @Override
+    public String getDescription() {
+        return "Ice trap";
+    }
 }

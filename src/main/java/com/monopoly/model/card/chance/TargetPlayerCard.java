@@ -11,7 +11,11 @@ public class TargetPlayerCard extends ChanceCard {
 
     @Override
     public void apply(Player player, GameContext context) {
-        // UI/GameController will prompt current player to choose a target
+        if (context.getDifficulty() == com.monopoly.model.GameDifficulty.HARD
+            && getDescription().toLowerCase().contains("swap")) {
+            player.addHardModeSwapCard();
+            return;
+        }
         context.triggerTargetPlayerChoice(player);
     }
 }
