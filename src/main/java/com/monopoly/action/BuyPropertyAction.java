@@ -1,3 +1,8 @@
+package main.java.com.monopoly.action;
+
+import com.monopoly.context.GameContext;
+import com.monopoly.model.player.Player;
+
 public class BuyPropertyAction implements ITileAction {
     private IBuyStrategy buyStrategy;
 

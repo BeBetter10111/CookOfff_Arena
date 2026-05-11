@@ -1,3 +1,5 @@
+package main.java.com.monopoly.action;
+
 public class BuildHouseAction implements ITileAction {
     private int houseCost;
 
